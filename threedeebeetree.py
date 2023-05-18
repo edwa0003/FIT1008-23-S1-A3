@@ -26,6 +26,7 @@ class ThreeDeeBeeTree(Generic[I]):
         self.root = None
         self.length = 0
 
+
     def is_empty(self) -> bool:
         """
             Checks to see if the 3DBT is empty
@@ -64,7 +65,16 @@ class ThreeDeeBeeTree(Generic[I]):
         """
             Attempts to insert an item into the tree, it uses the Key to insert it
         """
-        raise NotImplementedError()
+        if current is None:  # base case: at the leaf
+            current = BeeNode(key,item)
+            self.length += 1
+        elif key[0] < current.key[0] and key[1]<current.key[1] and key[2]<current.key[2]:
+
+        elif key[0] < current.key[1]
+
+        else:  # key == current.key
+            raise ValueError('Inserting duplicate item')
+        return current
 
     def is_leaf(self, current: BeeNode) -> bool:
         """ Simple check whether or not the node is a leaf. """
@@ -77,8 +87,8 @@ if __name__ == "__main__":
     tdbt[(4, 3, 1)] = "C" #x big, y same, z small
     tdbt[(5, 4, 0)] = "D" #x big, y large,z small
     print(tdbt.root.get_child_for_key((4, 3, 1)).subtree_size) # 2
-    #    A
-    # /  |
-    # B  C
-    #    |
-    #    D
+    #        A
+    #   /    |
+    # B(Q6)  C (Q8)
+    #        |
+    #        D (Q8)
