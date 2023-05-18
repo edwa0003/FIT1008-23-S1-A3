@@ -27,7 +27,6 @@ class BinarySearchTree(Generic[K, I]):
             Initialises an empty Binary Search Tree
             :complexity: O(1)
         """
-
         self.root = None
         self.length = 0
 
