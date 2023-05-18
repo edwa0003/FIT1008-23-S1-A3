@@ -30,8 +30,7 @@ class Percentiles(Generic[T]):
         if largerThan <= 0 and smallerThan <= 0:
             return []
 
-        sorted_values = mergesort(self.points)
-        return sorted_values[largerThan:smallerThan]
+        return self.points[largerThan:smallerThan]
 
 if __name__ == "__main__":
     points = list(range(50))
