@@ -2,7 +2,7 @@ from __future__ import annotations
 from typing import Generic, TypeVar
 from math import ceil
 from bst import BinarySearchTree
-import mergesort as ms
+from data_structures.mergesort import mergesort
 
 T = TypeVar("T")
 I = TypeVar("I")
@@ -30,7 +30,7 @@ class Percentiles(Generic[T]):
         if largerThan <= 0 and smallerThan <= 0:
             return []
 
-        sorted_values = ms.mergesort(self.points)
+        sorted_values = mergesort(self.points)
         return sorted_values[largerThan:smallerThan]
 
 if __name__ == "__main__":

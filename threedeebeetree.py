@@ -73,7 +73,12 @@ class ThreeDeeBeeTree(Generic[I]):
 if __name__ == "__main__":
     tdbt = ThreeDeeBeeTree()
     tdbt[(3, 3, 3)] = "A"
-    tdbt[(1, 5, 2)] = "B"
-    tdbt[(4, 3, 1)] = "C"
-    tdbt[(5, 4, 0)] = "D"
+    tdbt[(1, 5, 2)] = "B" #x small, y large, z small
+    tdbt[(4, 3, 1)] = "C" #x big, y same, z small
+    tdbt[(5, 4, 0)] = "D" #x big, y large,z small
     print(tdbt.root.get_child_for_key((4, 3, 1)).subtree_size) # 2
+    #    A
+    # /  |
+    # B  C
+    #    |
+    #    D

@@ -11,6 +11,7 @@ __docformat__ = 'reStructuredText'
 from typing import TypeVar, Generic
 from node import TreeNode
 import sys
+from data_structures.linked_stack import LinkedStack
 
 # generic types
 K = TypeVar('K')
@@ -209,3 +210,21 @@ class BinarySearchTree(Generic[K, I]):
 
         # If we get here, we didn't find the kth smallest node.
         raise ValueError("k out of bounds")
+
+    def to_list(self) -> list:
+        """
+        Converts the items in the BST into a list.
+        :return: A list of items in the BST.
+        """
+        node_list = []
+        self._in_order_traversal(self.root, node_list)
+        return node_list
+
+    def _in_order_traversal(self, current: TreeNode, node_list: list) -> None:
+        """
+        Performs in-order traversal of the BST and appends items to the result list.
+        """
+        if current is not None:
+            self._in_order_traversal(current.left, node_list)
+            node_list.append(current.item)
+            self._in_order_traversal(current.right, node_list)
