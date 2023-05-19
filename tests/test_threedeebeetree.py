@@ -30,7 +30,7 @@ class TestThreeDeeBeeTree(unittest.TestCase):
         self.assertEqual(child.key, (-11, 4, -16))
         print(tdbt.root.q2.q2.q3)
 
-        subchild = child.get_child_for_key((-18, 7, 5))
+        subchild = child.get_child_for_key((-18, 7, 5)) #(-18,7,5) has a
         self.assertEqual(subchild.key, (-14, 18, -4))
 
         other_subchild = child.get_child_for_key((3, 10, 20))

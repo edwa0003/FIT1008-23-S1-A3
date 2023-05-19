@@ -26,30 +26,44 @@ class BeeNode:
         self.q8=None
 
     def get_child_for_key(self, point: Point) -> BeeNode | None:
-        if self.q1 is not None and point == self.q1.key:
-            print('q1')
-            return self.q1
-        elif self.q2 is not None and point == self.q2.key:
-            print('q2')
-            return self.q2
-        elif self.q3 is not None and point == self.q3.key:
-            print('q3')
-            return self.q3
-        elif self.q4 is not None and point == self.q4.key:
-            print('q4')
-            return self.q4
-        elif self.q5 is not None and point == self.q5.key:
-            print('q5')
-            return self.q5
-        elif self.q6 is not None and point == self.q6.key:
-            print('q6')
-            return self.q6
-        elif self.q7 is not None and point == self.q7.key:
-            print('q7')
-            return self.q7
-        elif self.q8 is not None and point == self.q8.key:
-            print('q8')
-            return self.q8
+        if point[0]>=self.key[0] and point[1]>=self.key[1] and point[2]>=self.key[2]:
+            return self.get_child_for_key_aux(point,self.q1)
+        elif point[0]<=self.key[0] and point[1]>=self.key[1] and point[2]>=self.key[2]:
+            return self.get_child_for_key_aux(point, self.q2)
+        elif point[0]<=self.key[0] and point[1]<=self.key[1] and point[2]>=self.key[2]:
+            return self.get_child_for_key_aux(point, self.q3)
+        elif point[0]>=self.key[0] and point[1]<=self.key[1] and point[2]>=self.key[2]:
+            return self.get_child_for_key_aux(point, self.q4)
+        elif point[0]>=self.key[0] and point[1]>=self.key[1] and point[2]<=self.key[2]:
+            return self.get_child_for_key_aux(point, self.q5)
+        elif point[0]<=self.key[0] and point[1]>=self.key[1] and point[2]<=self.key[2]:
+            return self.get_child_for_key_aux(point, self.q6)
+        elif point[0]<=self.key[0] and point[1]<=self.key[1] and point[2]<=self.key[2]:
+            return self.get_child_for_key_aux(point, self.q7)
+        elif point[0] >= self.key[0] and point[1] <= self.key[1] and point[2] <= self.key[2]:
+            return self.get_child_for_key_aux(point, self.q8)
+        else:
+            return None
+
+    def get_child_for_key_aux(self, point: Point, current: BeeNode) -> BeeNode | None:
+        if current is not None and point[0]==current.key[0] and point[1]==current.key[1] and point[2]==current.key[2]:
+            return current
+        elif current.q1 is not None and point[0]>=current.key[0] and point[1]>=current.key[1] and point[2]>=current.key[2]:
+            return self.get_child_for_key_aux(point,current.q1)
+        elif current.q2 is not None and point[0]<=current.key[0] and point[1]>=current.key[1] and point[2]>=current.key[2]:
+            return self.get_child_for_key_aux(point, current.q2)
+        elif current.q3 is not None and point[0] <= current.key[0] and point[1] <= current.key[1] and point[2] >= current.key[2]:
+            return self.get_child_for_key_aux(point, current.q3)
+        elif current.q4 is not None and point[0] >= current.key[0] and point[1] <= current.key[1] and point[2] >= current.key[2]:
+            return self.get_child_for_key_aux(point, current.q4)
+        elif current.q5 is not None and point[0] >= current.key[0] and point[1] >= current.key[1] and point[2] <= current.key[2]:
+            return self.get_child_for_key_aux(point, current.q5)
+        elif current.q6 is not None and point[0] <= current.key[0] and point[1] >= current.key[1] and point[2] <= current.key[2]:
+            return self.get_child_for_key_aux(point, current.q6)
+        elif current.q7 is not None and point[0]<=current.key[0] and point[1]<=current.key[1] and point[2]<=current.key[2]:
+            return self.get_child_for_key_aux(point, current.q7)
+        elif current.q8 is not None and point[0] >= current.key[0] and point[1] <= current.key[1] and point[2] <= current.key[2]:
+            return self.get_child_for_key_aux(point, current.q8)
         else:
             return None
 
@@ -147,7 +161,7 @@ if __name__ == "__main__":
     print('tdbt.root.q5', tdbt.root.q5)
     print('tdbt.root.q5', tdbt.root.q5.q5)
     print(tdbt.root.get_child_for_key((4, 3, 1)))
-    print(tdbt.root.get_child_for_key((4, 3, 1)).subtree_size) # 2
+    #print(tdbt.root.get_child_for_key((4, 3, 1)).subtree_size) # 2
     #        A
     #   /    |
     # B(Q6)  C (Q5)
