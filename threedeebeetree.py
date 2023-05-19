@@ -26,24 +26,32 @@ class BeeNode:
         self.q8=None
 
     def get_child_for_key(self, point: Point) -> BeeNode | None:
-        if point==self.q1.key:
+        if self.q1 is not None and point == self.q1.key:
+            print('q1')
             return self.q1
-        elif point==self.q2.key:
+        elif self.q2 is not None and point == self.q2.key:
+            print('q2')
             return self.q2
-        elif point==self.q3.key:
+        elif self.q3 is not None and point == self.q3.key:
+            print('q3')
             return self.q3
-        elif point==self.q4.key:
+        elif self.q4 is not None and point == self.q4.key:
+            print('q4')
             return self.q4
-        elif point==self.q5.key:
+        elif self.q5 is not None and point == self.q5.key:
+            print('q5')
             return self.q5
-        elif point==self.q6.key:
+        elif self.q6 is not None and point == self.q6.key:
+            print('q6')
             return self.q6
-        elif point==self.q7.key:
+        elif self.q7 is not None and point == self.q7.key:
+            print('q7')
             return self.q7
-        elif point==self.q8.key:
+        elif self.q8 is not None and point == self.q8.key:
+            print('q8')
             return self.q8
         else:
-            raise ValueError('key doesnt exist')
+            return None
 
 class ThreeDeeBeeTree(Generic[I]):
     """ 3️⃣🇩🐝🌳 tree. """
@@ -138,7 +146,8 @@ if __name__ == "__main__":
     print('tdbt.root.q6',tdbt.root.q6)
     print('tdbt.root.q5', tdbt.root.q5)
     print('tdbt.root.q5', tdbt.root.q5.q5)
-    #print(tdbt.root.get_child_for_key((4, 3, 1)).subtree_size) # 2
+    print(tdbt.root.get_child_for_key((4, 3, 1)))
+    print(tdbt.root.get_child_for_key((4, 3, 1)).subtree_size) # 2
     #        A
     #   /    |
     # B(Q6)  C (Q5)

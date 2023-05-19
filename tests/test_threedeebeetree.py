@@ -7,13 +7,13 @@ from threedeebeetree import ThreeDeeBeeTree
 class TestThreeDeeBeeTree(unittest.TestCase):
 
     TESTING_POINTS = [
-        (6, -1, -17), 
-        (-11, 4, -16), 
-        (5, 5, 7), 
-        (-16, 2, -6), 
-        (10, -20, 1), 
-        (-14, 18, -4), 
-        (-18, 7, 5), 
+        (6, -1, -17), #root
+        (-11, 4, -16), # x small, y big, z big (q2)
+        (5, 5, 7), # x small, y big, z big (q2), x big, y big, z big (q1)
+        (-16, 2, -6), # x small, y big, z big (q2), x small, y small, z big (q3)
+        (10, -20, 1), # x big, y small, z big (q4)
+        (-14, 18, -4), # x small, y big, z big (q2), x small, y big, z big (q2)
+        (-18, 7, 5), # x small, y big, z big (q2), x small, y big, z big (q2), x small, y small, z big (q3)
         (16, 0, -14), 
         (-6, -14, 12), 
         (4, 6, 19)
@@ -26,8 +26,9 @@ class TestThreeDeeBeeTree(unittest.TestCase):
         for i, point in enumerate(self.TESTING_POINTS):
             tdbt[point] = i
         
-        child = tdbt.root.get_child_for_key((-11, 4, -16))
+        child = tdbt.root.get_child_for_key((-11, 4, -16)) #getting the node (-11, 4, -16) which is a child of (6, -1, -17)
         self.assertEqual(child.key, (-11, 4, -16))
+        print(tdbt.root.q2.q2.q3)
 
         subchild = child.get_child_for_key((-18, 7, 5))
         self.assertEqual(subchild.key, (-14, 18, -4))
