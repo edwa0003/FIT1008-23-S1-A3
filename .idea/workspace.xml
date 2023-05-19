@@ -49,34 +49,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for test_ratio.RatioTest" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="23-S1-A3" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_ratio.RatioTest&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Python tests for test_ratio.RatioTest.test_removal" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="23-S1-A3" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_ratio.RatioTest.test_removal&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
     <configuration name="Python tests for test_threedeebeetree.TestThreeDeeBeeTree" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="23-S1-A3" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -88,6 +60,20 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;test_threedeebeetree.TestThreeDeeBeeTree&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_threedeebeetree.TestThreeDeeBeeTree.test_get_node" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="23-S1-A3" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_threedeebeetree.TestThreeDeeBeeTree.test_get_node&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -105,13 +91,27 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
+    <configuration name="Python tests for test_threedeebeetree.TestThreeDeeBeeTree.test_subtree_sizes" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="23-S1-A3" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_threedeebeetree.TestThreeDeeBeeTree.test_subtree_sizes&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python tests.Python tests for test_threedeebeetree.TestThreeDeeBeeTree.test_positions" />
+        <item itemvalue="Python tests.Python tests for test_threedeebeetree.TestThreeDeeBeeTree.test_subtree_sizes" />
+        <item itemvalue="Python tests.Python tests for test_threedeebeetree.TestThreeDeeBeeTree.test_get_node" />
         <item itemvalue="Python tests.Python tests for test_threedeebeetree.TestThreeDeeBeeTree" />
         <item itemvalue="Python.threedeebeetree" />
-        <item itemvalue="Python tests.Python tests for test_ratio.RatioTest" />
-        <item itemvalue="Python tests.Python tests for test_ratio.RatioTest.test_removal" />
       </list>
     </recent_temporary>
   </component>
@@ -136,7 +136,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/threedeebeetree.py</url>
-          <line>72</line>
+          <line>62</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">

@@ -26,44 +26,34 @@ class BeeNode:
         self.q8=None
 
     def get_child_for_key(self, point: Point) -> BeeNode | None:
-        if point[0]>=self.key[0] and point[1]>=self.key[1] and point[2]>=self.key[2]:
-            return self.get_child_for_key_aux(point,self.q1)
-        elif point[0]<=self.key[0] and point[1]>=self.key[1] and point[2]>=self.key[2]:
-            return self.get_child_for_key_aux(point, self.q2)
-        elif point[0]<=self.key[0] and point[1]<=self.key[1] and point[2]>=self.key[2]:
-            return self.get_child_for_key_aux(point, self.q3)
-        elif point[0]>=self.key[0] and point[1]<=self.key[1] and point[2]>=self.key[2]:
-            return self.get_child_for_key_aux(point, self.q4)
-        elif point[0]>=self.key[0] and point[1]>=self.key[1] and point[2]<=self.key[2]:
-            return self.get_child_for_key_aux(point, self.q5)
-        elif point[0]<=self.key[0] and point[1]>=self.key[1] and point[2]<=self.key[2]:
-            return self.get_child_for_key_aux(point, self.q6)
-        elif point[0]<=self.key[0] and point[1]<=self.key[1] and point[2]<=self.key[2]:
-            return self.get_child_for_key_aux(point, self.q7)
-        elif point[0] >= self.key[0] and point[1] <= self.key[1] and point[2] <= self.key[2]:
-            return self.get_child_for_key_aux(point, self.q8)
-        else:
-            return None
+        return self.get_child_for_key_aux(point,self)
 
     def get_child_for_key_aux(self, point: Point, current: BeeNode) -> BeeNode | None:
-        if current is not None and point[0]==current.key[0] and point[1]==current.key[1] and point[2]==current.key[2]:
+        if current is None:
+            return None
+        elif current != self:
             return current
-        elif current.q1 is not None and point[0]>=current.key[0] and point[1]>=current.key[1] and point[2]>=current.key[2]:
-            return self.get_child_for_key_aux(point,current.q1)
-        elif current.q2 is not None and point[0]<=current.key[0] and point[1]>=current.key[1] and point[2]>=current.key[2]:
-            return self.get_child_for_key_aux(point, current.q2)
-        elif current.q3 is not None and point[0] <= current.key[0] and point[1] <= current.key[1] and point[2] >= current.key[2]:
-            return self.get_child_for_key_aux(point, current.q3)
+        else:
+            next= self.find_next_point(point,current)
+            return self.get_child_for_key_aux(point,next)
+
+    def find_next_point(self,point,current):
+        if current.q1 is not None and point[0] >= current.key[0] and point[1] >= current.key[1] and point[2]>=current.key[2]:
+            return current.q1
+        elif current.q2 is not None and point[0] <= current.key[0] and point[1] >= current.key[1] and point[2] >= current.key[2]:
+            return current.q2
+        elif current.q3 is not None and point[0] <= current.key[0] and point[1] <= current.key[1] and point[2] >=current.key[2]:
+            return current.q3
         elif current.q4 is not None and point[0] >= current.key[0] and point[1] <= current.key[1] and point[2] >= current.key[2]:
-            return self.get_child_for_key_aux(point, current.q4)
+            return current.q4
         elif current.q5 is not None and point[0] >= current.key[0] and point[1] >= current.key[1] and point[2] <= current.key[2]:
-            return self.get_child_for_key_aux(point, current.q5)
+            return current.q5
         elif current.q6 is not None and point[0] <= current.key[0] and point[1] >= current.key[1] and point[2] <= current.key[2]:
-            return self.get_child_for_key_aux(point, current.q6)
-        elif current.q7 is not None and point[0]<=current.key[0] and point[1]<=current.key[1] and point[2]<=current.key[2]:
-            return self.get_child_for_key_aux(point, current.q7)
+            return current.q6
+        elif current.q7 is not None and point[0] <= current.key[0] and point[1] <= current.key[1] and point[2] <= current.key[2]:
+            return current.q7
         elif current.q8 is not None and point[0] >= current.key[0] and point[1] <= current.key[1] and point[2] <= current.key[2]:
-            return self.get_child_for_key_aux(point, current.q8)
+            return current.q8
         else:
             return None
 
