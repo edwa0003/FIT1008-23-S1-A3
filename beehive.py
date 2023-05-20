@@ -24,7 +24,7 @@ class BeehiveSelector:
         self.hive_tree = BinarySearchTree()
         for hive in hive_list:
             emerald_per_day = min(hive.capacity, hive.volume) * hive.nutrient_factor
-            self.hive_tree[emerald_per_day]=hive
+            self.hive_tree[(hive.x,hive.y,hive.z)]=hive
     
     def add_beehive(self, hive: Beehive):
         emerald_per_day = min(hive.capacity, hive.volume) * hive.nutrient_factor #the amount of emeralds you can gain is volume_harvested*nutrient_factor

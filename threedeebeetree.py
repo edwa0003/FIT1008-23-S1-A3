@@ -125,6 +125,10 @@ class ThreeDeeBeeTree(Generic[I]):
             current = BeeNode(key, item)
             self.length += 1
             return current
+        elif key==current.key: #updating item
+            current = BeeNode(key, item)
+            self.length += 1
+            return current
         else:
             if key[0] >= current.key[0]:
                 if key[1] >= current.key[1]:
@@ -168,11 +172,9 @@ if __name__ == "__main__":
     tdbt[(1, 5, 2)] = "B" #x small, y big, z small
     tdbt[(4, 3, 1)] = "C" #x big, y big, z small
     tdbt[(5, 4, 0)] = "D" #x big, y big, z small, x big, y big, z small
-    print('tdbt.root',tdbt.root)
-    print('tdbt.root.q6',tdbt.root.q6)
-    print('tdbt.root.q5', tdbt.root.q5)
-    print('tdbt.root.q5', tdbt.root.q5.q5)
-    print(tdbt.root.get_child_for_key((4, 3, 1)))
+    print('tdbt[(5, 4, 0)]:',tdbt[(5, 4, 0)])
+    tdbt[(5, 4, 0)] = "E"
+    print('tdbt[(5, 4, 0)]:', tdbt[(5, 4, 0)])
     #print(tdbt.root.get_child_for_key((4, 3, 1)).subtree_size) # 2
     #        A
     #   /    |

@@ -229,10 +229,13 @@ class BinarySearchTree(Generic[K, I]):
 
 if __name__ == '__main__':
     binary_tree=BinarySearchTree()
-    binary_tree['a']='a'
-    binary_tree['item']='item'
-    binary_tree['boom']='boom'
-    print(binary_tree['boom'])
-    binary_tree.__delitem__('boom')
-    binary_tree['boom']='new boom'
-    print(binary_tree['boom'])
+    binary_tree[(15, 12, 13)]='b1'
+    binary_tree[(25, 22, 23)]='b2'
+    binary_tree[(35, 32, 33)]='b3'
+    binary_tree[(45, 42, 43)] = 'b4'
+    binary_tree[(55, 52, 53)] = 'b5'
+    binary_tree.__delitem__(((45, 42, 43)))
+    b1=binary_tree[(15, 12, 13)]
+    b1='new b1'
+    print(binary_tree[(15, 12, 13)])
+    print(binary_tree[(45, 42, 43)])
