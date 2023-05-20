@@ -11,51 +11,38 @@ class BeeNode:
     key: Point
     item: I
     subtree_size: int = 1
-
-    def __init__(self,key: Point, item: I):
-        self.key=key
-        self.item=item
-        self.subtree_size=1
-        self.q1=None
-        self.q2=None
-        self.q3=None
-        self.q4=None
-        self.q5=None
-        self.q6=None
-        self.q7=None
-        self.q8=None
+    q1: BeeNode | None = None
+    q2: BeeNode | None = None
+    q3: BeeNode | None = None
+    q4: BeeNode | None = None
+    q5: BeeNode | None = None
+    q6: BeeNode | None = None
+    q7: BeeNode | None = None
+    q8: BeeNode | None = None
 
     def get_child_for_key(self, point: Point) -> BeeNode | None:
-        return self.get_child_for_key_aux(point,self)
-
-    def get_child_for_key_aux(self, point: Point, current: BeeNode) -> BeeNode | None:
-        if current is None:
-            return None
-        elif current != self:
-            return current
-        else:
-            next= self.find_next_point(point,current)
-            return self.get_child_for_key_aux(point,next)
-
-    def find_next_point(self,point,current):
-        if current.q1 is not None and point[0] >= current.key[0] and point[1] >= current.key[1] and point[2]>=current.key[2]:
-            return current.q1
-        elif current.q2 is not None and point[0] <= current.key[0] and point[1] >= current.key[1] and point[2] >= current.key[2]:
-            return current.q2
-        elif current.q3 is not None and point[0] <= current.key[0] and point[1] <= current.key[1] and point[2] >=current.key[2]:
-            return current.q3
-        elif current.q4 is not None and point[0] >= current.key[0] and point[1] <= current.key[1] and point[2] >= current.key[2]:
-            return current.q4
-        elif current.q5 is not None and point[0] >= current.key[0] and point[1] >= current.key[1] and point[2] <= current.key[2]:
-            return current.q5
-        elif current.q6 is not None and point[0] <= current.key[0] and point[1] >= current.key[1] and point[2] <= current.key[2]:
-            return current.q6
-        elif current.q7 is not None and point[0] <= current.key[0] and point[1] <= current.key[1] and point[2] <= current.key[2]:
-            return current.q7
-        elif current.q8 is not None and point[0] >= current.key[0] and point[1] <= current.key[1] and point[2] <= current.key[2]:
-            return current.q8
-        else:
-            return None
+        if point[0] >= self.key[0]:
+            if point[1] >= self.key[1]:
+                if point[2] >= self.key[2]:
+                    return self.q1
+                else:  # z < self.key[2]
+                    return self.q5
+            else:  # y < self.key[1]
+                if point[2] >= self.key[2]:
+                    return self.q4
+                else:  # z < self.key[2]
+                    return self.q8
+        else:  # x < self.key[0]
+            if point[1] >= self.key[1]:
+                if point[2] >= self.key[2]:
+                    return self.q2
+                else:  # z < self.key[2]
+                    return self.q6
+            else:  # y < self.key[1]
+                if point[2] >= self.key[2]:
+                    return self.q3
+                else:  # key[2] < current.key[2]
+                    return self.q7
 
 class ThreeDeeBeeTree(Generic[I]):
     """ 3️⃣🇩🐝🌳 tree. """
@@ -96,7 +83,36 @@ class ThreeDeeBeeTree(Generic[I]):
         return node.item
 
     def get_tree_node_by_key(self, key: Point) -> BeeNode:
-        raise NotImplementedError()
+        return self.get_tree_node_by_key_aux(self.root,key)
+
+    def get_tree_node_by_key_aux(self, current: BeeNode, key: Point) -> BeeNode:
+        if current == None:
+            raise KeyError("Key not found: {0}".format(key))
+        elif key == current.key:
+            return current
+        else:
+            if key[0] >= current.key[0]:
+                if key[1] >= current.key[1]:
+                    if key[2] >= current.key[2]:
+                        return self.get_tree_node_by_key_aux(current.q1, key)
+                    else:  # z < self.key[2]
+                        return self.get_tree_node_by_key_aux(current.q5, key)
+                else:  # y < self.key[1]
+                    if key[2] >= current.key[2]:
+                        return self.get_tree_node_by_key_aux(current.q4, key)
+                    else:  # z < self.key[2]
+                        return self.get_tree_node_by_key_aux(current.q8, key)
+            else:  # x < self.key[0]
+                if key[1] >= current.key[1]:
+                    if key[2] >= current.key[2]:
+                        return self.get_tree_node_by_key_aux(current.q2, key)
+                    else:  # z < self.key[2]
+                        return self.get_tree_node_by_key_aux(current.q6, key)
+                else:  # y < self.key[1]
+                    if key[2] >= current.key[2]:
+                        return self.get_tree_node_by_key_aux(current.q3, key)
+                    else:  # key[2] < current.key[2]
+                        return self.get_tree_node_by_key_aux(current.q7, key)
 
     def __setitem__(self, key: Point, item: I) -> None:
         self.root = self.insert_aux(self.root, key, item)
@@ -108,32 +124,38 @@ class ThreeDeeBeeTree(Generic[I]):
         if current is None:  # base case: at the leaf
             current = BeeNode(key, item)
             self.length += 1
-        elif key[0]>=current.key[0] and key[1]>=current.key[1] and key[2]>=current.key[2]:
-            current.q1=self.insert_aux(current.q1,key,item)
-            current.subtree_size+=1
-        elif key[0]<=current.key[0] and key[1]>=current.key[1] and key[2]>=current.key[2]:
-            current.q2=self.insert_aux(current.q2,key,item)
-            current.subtree_size+=1
-        elif key[0]<=current.key[0] and key[1]<=current.key[1] and key[2]>=current.key[2]:
-            current.q3=self.insert_aux(current.q3,key,item)
-            current.subtree_size+=1
-        elif key[0]>=current.key[0] and key[1]<=current.key[1] and key[2]>=current.key[2]:
-            current.q4=self.insert_aux(current.q4, key,item)
-            current.subtree_size+=1
-        elif key[0]>=current.key[0] and key[1]>=current.key[1] and key[2]<=current.key[2]:
-            current.q5=self.insert_aux(current.q5,key,item)
-            current.subtree_size += 1
-        elif key[0]<=current.key[0] and key[1]>=current.key[1] and key[2]<=current.key[2]:
-            current.q6=self.insert_aux(current.q6,key,item)
-            current.subtree_size += 1
-        elif key[0]<=current.key[0] and key[1]<=current.key[1] and key[2]<=current.key[2]:
-            current.q7 = self.insert_aux(current.q7, key, item)
-            current.subtree_size += 1
-        elif key[0] >= current.key[0] and key[1] <= current.key[1] and key[2] <= current.key[2]:
-            current.q8 = self.insert_aux(current.q8, key, item)
-            current.subtree_size += 1
+            return current
         else:
-            raise ValueError('duplicate')
+            if key[0] >= current.key[0]:
+                if key[1] >= current.key[1]:
+                    if key[2] >= current.key[2]:
+                        current.q1 = self.insert_aux(current.q1, key, item)
+                        current.subtree_size += 1
+                    else:  # z < self.key[2]
+                        current.q5 = self.insert_aux(current.q5, key, item)
+                        current.subtree_size += 1
+                else:  # y < self.key[1]
+                    if key[2] >= current.key[2]:
+                        current.q4=self.insert_aux(current.q4, key, item)
+                        current.subtree_size += 1
+                    else:  # z < self.key[2]
+                        current.q8 = self.insert_aux(current.q8, key, item)
+                        current.subtree_size += 1
+            else:  # x < self.key[0]
+                if key[1] >= current.key[1]:
+                    if key[2] >= current.key[2]:
+                        current.q2=self.insert_aux(current.q2, key, item)
+                        current.subtree_size += 1
+                    else:  # z < self.key[2]
+                        current.q6=self.insert_aux(current.q6,key,item)
+                        current.subtree_size += 1
+                else:  # y < self.key[1]
+                    if key[2] >= current.key[2]:
+                        current.q3 = self.insert_aux(current.q3, key, item)
+                        current.subtree_size += 1
+                    else:  # key[2] < current.key[2]
+                        current.q7=self.insert_aux(current.q7, key, item)
+                        current.subtree_size += 1
         return current
 
     def is_leaf(self, current: BeeNode) -> bool:

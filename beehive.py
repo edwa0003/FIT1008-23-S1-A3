@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from heap import MaxHeap
+from referential_array import ArrayR
 
 @dataclass
 class Beehive:
@@ -16,10 +17,13 @@ class Beehive:
 class BeehiveSelector:
 
     def __init__(self, max_beehives: int):
-        raise NotImplementedError()
+        self.max_beehives=max_beehives
+        self.hive_array=ArrayR(self.max_beehives)
 
     def set_all_beehives(self, hive_list: list[Beehive]):
-        raise NotImplementedError()
+        self.hive_array = ArrayR(self.max_beehives) #create an empty array
+        for i in range(len(hive_list)): #adding the beehive one by one to the array
+            self.hive_array[i]=hive_list[i]
     
     def add_beehive(self, hive: Beehive):
         raise NotImplementedError()

@@ -10,6 +10,13 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -27,8 +34,8 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="Python tests.Python tests for test_threedeebeetree.TestThreeDeeBeeTree.test_positions">
-    <configuration name="threedeebeetree" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python tests.Python tests for test_threedeebeetree.TestThreeDeeBeeTree">
+    <configuration name="coba array" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="23-S1-A3" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -36,11 +43,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/data_structures" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/threedeebeetree.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data_structures/coba array.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -107,11 +114,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Python tests for test_threedeebeetree.TestThreeDeeBeeTree.test_positions" />
-        <item itemvalue="Python tests.Python tests for test_threedeebeetree.TestThreeDeeBeeTree.test_subtree_sizes" />
-        <item itemvalue="Python tests.Python tests for test_threedeebeetree.TestThreeDeeBeeTree.test_get_node" />
         <item itemvalue="Python tests.Python tests for test_threedeebeetree.TestThreeDeeBeeTree" />
-        <item itemvalue="Python.threedeebeetree" />
+        <item itemvalue="Python.coba array" />
+        <item itemvalue="Python tests.Python tests for test_threedeebeetree.TestThreeDeeBeeTree.test_get_node" />
+        <item itemvalue="Python tests.Python tests for test_threedeebeetree.TestThreeDeeBeeTree.test_subtree_sizes" />
+        <item itemvalue="Python tests.Python tests for test_threedeebeetree.TestThreeDeeBeeTree.test_positions" />
       </list>
     </recent_temporary>
   </component>
@@ -136,13 +143,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/threedeebeetree.py</url>
-          <line>62</line>
+          <line>49</line>
           <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/tests/test_threedeebeetree.py</url>
-          <line>23</line>
-          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

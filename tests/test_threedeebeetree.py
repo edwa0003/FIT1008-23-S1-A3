@@ -25,10 +25,9 @@ class TestThreeDeeBeeTree(unittest.TestCase):
         tdbt = ThreeDeeBeeTree()
         for i, point in enumerate(self.TESTING_POINTS):
             tdbt[point] = i
-        
+
         child = tdbt.root.get_child_for_key((-11, 4, -16)) #getting the node (-11, 4, -16) which is a child of (6, -1, -17)
         self.assertEqual(child.key, (-11, 4, -16))
-        print(tdbt.root.q2.q2.q3)
 
         subchild = child.get_child_for_key((-18, 7, 5)) #(-18,7,5) has a
         self.assertEqual(subchild.key, (-14, 18, -4))
