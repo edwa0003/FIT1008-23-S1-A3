@@ -11,7 +11,6 @@ __docformat__ = 'reStructuredText'
 from typing import TypeVar, Generic
 from node import TreeNode
 import sys
-from data_structures.linked_stack import LinkedStack
 
 # generic types
 K = TypeVar('K')

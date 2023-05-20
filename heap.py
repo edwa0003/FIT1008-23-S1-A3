@@ -6,7 +6,6 @@ __docformat__ = 'reStructuredText'
 from typing import Generic
 from referential_array import ArrayR, T
 
-
 class MaxHeap(Generic[T]):
     MIN_CAPACITY = 1
 
@@ -88,6 +87,7 @@ if __name__ == '__main__':
 
     for item in items:
         heap.add(item)
-        
+
     while(len(heap) > 0):
         print(heap.get_max())
+
