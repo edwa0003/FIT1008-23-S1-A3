@@ -226,3 +226,13 @@ class BinarySearchTree(Generic[K, I]):
             self._in_order_traversal(current.left, node_list)
             node_list.append(current.item)
             self._in_order_traversal(current.right, node_list)
+
+if __name__ == '__main__':
+    binary_tree=BinarySearchTree()
+    binary_tree['a']='a'
+    binary_tree['item']='item'
+    binary_tree['boom']='boom'
+    print(binary_tree['boom'])
+    binary_tree.__delitem__('boom')
+    binary_tree['boom']='new boom'
+    print(binary_tree['boom'])

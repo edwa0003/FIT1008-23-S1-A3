@@ -21,24 +21,22 @@ class BeehiveSelector:
         self.hive_tree=BinarySearchTree()
 
     def set_all_beehives(self, hive_list: list[Beehive]):
+        self.hive_tree = BinarySearchTree()
         for hive in hive_list:
             emerald_per_day = min(hive.capacity, hive.volume) * hive.nutrient_factor
             self.hive_tree[emerald_per_day]=hive
     
     def add_beehive(self, hive: Beehive):
-        self.emerald_per_day_heap.add(min(hive.capacity,hive.volume)*hive.nutrient_factor) #the amount of emeralds you can gain is volume_harvested*nutrient_factor
+        emerald_per_day = min(hive.capacity, hive.volume) * hive.nutrient_factor #the amount of emeralds you can gain is volume_harvested*nutrient_factor
+        self.emerald_per_day_heap.add(emerald_per_day)
+        self.hive_tree[emerald_per_day] = hive
     
     def harvest_best_beehive(self)-> float:
         emeralds_gained=self.emerald_per_day_heap.get_max()
+        harvested_hive=self.hive_tree[emeralds_gained]
+        volume_harvested=emeralds_gained/harvested_hive.volume
+        hive_after_harvest=Beehive(harvested_hive.capacity,harvested_hive.nutrient_factor,harvested_hive.volume-volume_harvested)
+        emerald_per_day = min(hive.capacity, hive.volume) * hive.nutrient_factor
+
 
 if __name__ == '__main__':
-    h = MaxHeap(5)
-    b1, b2, b3, b4, b5 = (
-        Beehive(15, 12, 13, capacity=40, nutrient_factor=5, volume=15),
-        Beehive(25, 22, 23, capacity=15, nutrient_factor=8, volume=40),
-        Beehive(35, 32, 33, capacity=40, nutrient_factor=3, volume=40),
-        Beehive(45, 42, 43, capacity=1, nutrient_factor=85, volume=10),
-        Beehive(55, 52, 53, capacity=400, nutrient_factor=5000, volume=0),
-    )
-    for hive in [b1, b2, b3, b4, b5]:
-        h.add(hive)
