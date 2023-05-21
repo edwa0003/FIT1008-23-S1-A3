@@ -34,7 +34,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="Python tests.Python tests for test_threedeebeetree.TestThreeDeeBeeTree">
+  <component name="RunManager" selected="Python.beehive">
     <configuration name="beehive" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="23-S1-A3" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -135,10 +135,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.beehive" />
         <item itemvalue="Python tests.Python tests for test_threedeebeetree.TestThreeDeeBeeTree" />
         <item itemvalue="Python.threedeebeetree" />
         <item itemvalue="Python.bst" />
-        <item itemvalue="Python.beehive" />
         <item itemvalue="Python.heap" />
       </list>
     </recent_temporary>
@@ -181,6 +181,11 @@
           <url>file://$PROJECT_DIR$/threedeebeetree.py</url>
           <line>168</line>
           <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/beehive.py</url>
+          <line>45</line>
+          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
