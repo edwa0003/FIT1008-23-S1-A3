@@ -21,8 +21,7 @@ class Beehive:
         self.capacity=capacity
         self.nutrient_factor=nutrient_factor
         self.volume=volume
-        self.volume_harvested=min(self.capacity,self.volume)
-        self.emeralds_per_day=self.volume_harvested*self.nutrient_factor
+        self.emeralds_per_day=min(self.capacity,self.volume)*self.nutrient_factor
 
     def __lt__(self, other):
         return self.emeralds_per_day < other.emeralds_per_day
@@ -49,17 +48,12 @@ class BeehiveSelector:
     def harvest_best_beehive(self)-> float:
         harvested_hive=self.emerald_per_day_heap.get_max()
         print('harvested hive before volume change: ',harvested_hive)
-        emeralds_gained=harvested_hive.volume_harvested*harvested_hive.nutrient_factor
-        print('harvested_hive.volume_harvested',harvested_hive.volume_harvested)
-        harvested_hive.volume-=harvested_hive.volume_harvested
-        if harvested_hive.volume>0:
-            print('harvested hive after volume change: ', harvested_hive)
-            self.emerald_per_day_heap.add(harvested_hive)
-            print('adding hive to heap')
-        else:
-            print('harvested hive after volume change: ', harvested_hive)
-            print('hive is empty')
-        return emeralds_gained
+        harvested_volume=min(harvested_hive.capacity,harvested_hive.volume)
+        print('harvested_volume',harvested_volume)
+        new_volume=harvested_hive.volume-harvested_volume
+        updated_hive=Beehive(harvested_hive.x,harvested_hive.y,harvested_hive.z,harvested_hive.capacity,harvested_hive.nutrient_factor,new_volume)
+        self.emerald_per_day_heap.add(updated_hive)
+        return harvested_hive.emeralds_per_day
 
 if __name__ == '__main__':
     b1=Beehive(15, 12, 13, capacity=40, nutrient_factor=5, volume=15) #emerald per day 75
