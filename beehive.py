@@ -101,6 +101,7 @@ class BeehiveSelector:
         - Worst case: O(1). Only initializing the item.
         - Best case: O(1). Only initializing the item.
         """
+        self.max
         self.emeralds_per_day_heap=MaxHeap(max_beehives) #a heap of how much emeralds per day can be gained
 
     def set_all_beehives(self, hive_list: list[Beehive]):

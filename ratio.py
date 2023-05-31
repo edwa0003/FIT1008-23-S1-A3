@@ -24,8 +24,7 @@ class Percentiles(Generic[T]):
         Complexity:
         - Worst case: O(BinarySearchTree.__setitem__)=O(logN). N being the amount of elements in the tree.
         This happens when we have to go deep.
-        - Best case: O(BinarySearchTree.__setitem__)=O(1). N being the amount of elements in the tree.
-        Adding to root.
+        - Best case: O(BinarySearchTree.__setitem__)=O(1). Adding to root.
         """
         self.tree[item] = item
 
@@ -42,8 +41,7 @@ class Percentiles(Generic[T]):
         Complexity:
         - Worst case: O(BinarySearchTree.__delitem__)=O(logN). N being the amount of elements.
         When we are deleting a node that is deep and with two childs.
-        - Best case: O(BinarySearchTree.__delitem__)=O(logN). N being the amount of elements.
-        When we are deleting a leaf node.
+        - Best case: O(BinarySearchTree.__delitem__)=O(1). When we are deleting the root node without child.
         """
         if self.tree is not None:
             del self.tree[item]
@@ -60,10 +58,10 @@ class Percentiles(Generic[T]):
         Returns: the function in_order_iterative
 
         Complexity:
-        - Worst case: O(kth_smallest+kth_smallest+in_order_iterative)=O(2*logN+logN+O)=O(logN+O). N being the amount of elements in the tree.
-        This happens when we need to add a lot of elements.
-        - Best case: O(kth_smallest+kth_smallest+in_order_iterative)=O(2*logN+logN+O)=O(logN+O). N being the amount of elements in the tree.
-        This happens when only add a few elements.
+        - Worst case: O(kth_smallest+kth_smallest+in_order_iterative)=O(2*logN+logN+O)=O(logN+O).
+        N being the amount of elements in the tree. This happens when we need to add a lot of elements.
+        - Best case: O(kth_smallest+kth_smallest+in_order_iterative)=O(2*logN+logN+O)=O(logN+O).
+        N being the amount of elements in the tree. This happens when only add a few elements.
         """
         min_ratio = ceil(x * len(self.tree) / 100)
         max_ratio = ceil(y * len(self.tree) / 100)

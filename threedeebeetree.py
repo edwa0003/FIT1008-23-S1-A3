@@ -294,8 +294,8 @@ class ThreeDeeBeeTree(Generic[I]):
         - BeeNode: BeeNode, the BeeNode we want to insert
 
         Complexity:
-        - Worst case: O(1). When q1 is not None.
-        - Best case: O(1). When q1 to q8 is None.
+        - Worst case: O(1). When q1 to q8 is not None.
+        - Best case: O(1). When q1 is None.
         """
         return current.q1 is None and current.q2 is None and current.q3 is None and current.q4 is None and current.q4 is None and current.q5 is None and current.q6 is None and current.q7 is None and current.q8 is None
 
