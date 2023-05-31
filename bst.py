@@ -43,8 +43,8 @@ class BinarySearchTree(Generic[K, I]):
 
     def __contains__(self, key: K) -> bool:
         """
-            Checks to see if the key is in the BST
-            :complexity: see __getitem__(self, key: K) -> (K, I)
+        Checks to see if the key is in the BST
+        complexity: see __getitem__(self, key: K) -> (K, I)
         """
         try:
             _ = self[key]
@@ -55,10 +55,10 @@ class BinarySearchTree(Generic[K, I]):
 
     def __getitem__(self, key: K) -> I:
         """
-            Attempts to get an item in the tree, it uses the Key to attempt to find it
-            :complexity best: O(CompK) finds the item in the root of the tree
-            :complexity worst: O(CompK * D) item is not found, where D is the depth of the tree
-            CompK is the complexity of comparing the keys
+        Attempts to get an item in the tree, it uses the Key to attempt to find it
+        complexity best: O(CompK) finds the item in the root of the tree
+        complexity worst: O(CompK * D) item is not found, where D is the depth of the tree
+        CompK is the complexity of comparing the keys
         """
         return self.get_tree_node_by_key(key).item
 
@@ -80,10 +80,11 @@ class BinarySearchTree(Generic[K, I]):
 
     def insert_aux(self, current: TreeNode, key: K, item: I) -> TreeNode:
         """
-            Attempts to insert an item into the tree, it uses the Key to insert it
-            :complexity best: O(CompK) inserts the item at the root.
-            :complexity worst: O(CompK * D) inserting at the bottom of the tree
-            where D is the depth of the tree
+        Attempts to insert an item into the tree, it uses the Key to insert it
+
+        complexity best: O(CompK) inserts the item at the root.
+        complexity worst: O(CompK * D) inserting at the bottom of the tree
+        where D is the depth of the tree
             CompK is the complexity of comparing the keys
         """
         if current is None:  # base case: at the leaf
@@ -91,10 +92,10 @@ class BinarySearchTree(Generic[K, I]):
             self.length += 1
         elif key < current.key:
             current.left = self.insert_aux(current.left, key, item)
-            current.subtree_size += 1  # increment subtree size
+            current.subtree_size += 1
         elif key > current.key:
             current.right = self.insert_aux(current.right, key, item)
-            current.subtree_size += 1  # increment subtree size
+            current.subtree_size += 1
         else:  # key == current.key
             raise ValueError('Inserting duplicate item')
         return current
@@ -112,10 +113,10 @@ class BinarySearchTree(Generic[K, I]):
             raise ValueError('Deleting non-existent item')
         elif key < current.key:
             current.left = self.delete_aux(current.left, key)
-            current.subtree_size -= 1  # decrement subtree size
+            current.subtree_size -= 1
         elif key > current.key:
             current.right = self.delete_aux(current.right, key)
-            current.subtree_size -= 1  # decrement subtree size
+            current.subtree_size -= 1
         else:  # we found our key => do actual deletion
             if self.is_leaf(current):
                 self.length -= 1
@@ -126,37 +127,39 @@ class BinarySearchTree(Generic[K, I]):
             elif current.right is None:
                 self.length -= 1
                 return current.left
+            current.subtree_size -= 1
 
             # general case => find a successor
             succ = self.get_successor(current)
             current.key = succ.key
             current.item = succ.item
             current.right = self.delete_aux(current.right, succ.key)
-            current.subtree_size -= 1  # decrement subtree size
 
         return current
 
     def get_successor(self, current: TreeNode) -> TreeNode:
         """
-            Get successor of the current node.
-            It should be a child node having the smallest key among all the
-            larger keys.
-        """
-        if current.right is not None:
-            current = current.right
-            while current.left is not None:
-                current = current.left
-            return current
+        Get successor of the current node.
+        It should be a child node having the smallest key among all the larger keys.
+        Best Case: O(Log n) where the tree is balanced and n is the number of nodes of the tree but if the tree has no successor the best case will be O(1).
+	    Worst Case : O(N) When the tree is unbalanced where n is number of nodes so it has to trasverse in linear.
+    	"""
 
-        return None
+        if current.right is None:
+            return
+        else:
+            current = current.right
+            succesor = self.get_minimal(current)
+        return succesor
 
     def get_minimal(self, current: TreeNode) -> TreeNode:
         """
-            Get a node having the smallest key in the current sub-tree.
+        Get a node having the smallest key in the current sub-tree.
+        Best Case: O(Log n) Where n is number of nodes and happen when the tree is balance but if the tree have no left child and balance then the best case will be O(1).
+	    Worst Case : O(N) where n is number of nodes happen when the tree is unbalanced to the left so it must trasverse in linear.
         """
         while current.left is not None:
             current = current.left
-
         return current
 
     def is_leaf(self, current: TreeNode) -> bool:
@@ -187,45 +190,26 @@ class BinarySearchTree(Generic[K, I]):
     def kth_smallest(self, k: int, current: TreeNode) -> TreeNode:
         """
         Finds the kth smallest value by key in the subtree rooted at current.
-        """
-        if k < 1 or k > len(self):
-            raise IndexError("k out of bounds")
 
-        count = 0
-        stack = []
-        node = current
+        Best Case : O(Log n) where n is the number of nodes and the tree is balanced when k is 1 or size of tree but if it return the root then the best case will be O(1)
+	    Worst Case : O(N) where n is the number of nodes when the tree is unbalanced when k is 1 or maximum size of the tree.
 
-        while stack or node:
-            if node:
-                stack.append(node)
-                node = node.left
-            else:
-                node = stack.pop()
-                count += 1
-                if count == k:
-                    return node
-                node = node.right
+        """
+        if current.left is not None:
+            left_size = current.left.subtree_size
+        else:
+            left_size = 0
 
-        # If we get here, we didn't find the kth smallest node.
-        raise ValueError("k out of bounds")
+        if k <= left_size and current.left is not None:
+            return self.kth_smallest(k, current.left)
 
-    def to_list(self) -> list:
-        """
-        Converts the items in the BST into a list.
-        :return: A list of items in the BST.
-        """
-        node_list = []
-        self._in_order_traversal(self.root, node_list)
-        return node_list
+        k -= left_size
+        if k == 1:
+            return current
 
-    def _in_order_traversal(self, current: TreeNode, node_list: list) -> None:
-        """
-        Performs in-order traversal of the BST and appends items to the result list.
-        """
-        if current is not None:
-            self._in_order_traversal(current.left, node_list)
-            node_list.append(current.item)
-            self._in_order_traversal(current.right, node_list)
+        if current.right is not None:
+            k -= 1
+            return self.kth_smallest(k, current.right)
 
 if __name__ == '__main__':
     binary_tree=BinarySearchTree()

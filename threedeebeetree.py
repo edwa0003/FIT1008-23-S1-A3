@@ -21,6 +21,20 @@ class BeeNode:
     q8: BeeNode | None = None
 
     def get_child_for_key(self, point: Point) -> BeeNode | None:
+        """
+        Attempts to get a child from
+        Args:
+        - point: which is the key of the child we want to get
+
+        Raises: None
+
+        Returns:
+        - BeeNode: BeeNode, the BeeNode at the key we are looking for
+
+        Complexity:
+        - Worst case: O(1). When it's at q7.
+        - Best case: O(1). When it's at q1.
+        """
         if point[0] >= self.key[0]:
             if point[1] >= self.key[1]:
                 if point[2] >= self.key[2]:
@@ -49,25 +63,64 @@ class ThreeDeeBeeTree(Generic[I]):
 
     def __init__(self) -> None:
         """
-            Initialises an empty 3DBT
+        Initialises an empty 3DBT
+        Args: None
+
+        Raises: None
+
+        Returns: None, only initializing the item
+
+        Complexity:
+        - Worst case: O(1). Only initializing the item.
+        - Best case: O(1). Only initializing the item.
         """
         self.root = None
         self.length = 0
 
     def is_empty(self) -> bool:
         """
-            Checks to see if the 3DBT is empty
+        Checks to see if the 3DBT is empty
+        Args: None
+
+        Raises: None
+
+        Returns: A boolean whether it's empty or not
+
+        Complexity:
+        - Worst case: O(1). only gets a variable and make a boolean statement out of it.
+        - Best case: O(1). only gets a variable and make a boolean statement out of it.
         """
         return len(self) == 0
 
     def __len__(self) -> int:
-        """ Returns the number of nodes in the tree. """
+        """
+        Returns the number of nodes in the tree.
+        Args: None
+
+        Raises: None
+
+        Returns: The lenght which is how many elements there are. which is an integer
+
+        Complexity:
+        - Worst case: O(1). Only gets a variable and make a boolean statement out of it.
+        - Best case: O(1). Only gets a variable and make a boolean statement out of it.
+        """
 
         return self.length
 
     def __contains__(self, key: Point) -> bool:
         """
-            Checks to see if the key is in the 3DBT
+        Checks to see if the key is in the 3DBT
+        Args: key
+
+        Raises:
+        - KeyError: When the key isn't found
+
+        Returns: A boolean of whether the key is inside the tree
+
+        Complexity:
+        - Worst case: O(D). D being the depth of the tree. When the tree is very unbalanced, resembling linked list.
+        - Best case: O(1). When the key is at the root.
         """
         try:
             self.get_tree_node_by_key(key)
@@ -77,17 +130,58 @@ class ThreeDeeBeeTree(Generic[I]):
 
     def __getitem__(self, key: Point) -> I:
         """
-            Attempts to get an item in the tree, it uses the Key to attempt to find it
+        Attempts to get an item in the tree, it uses the Key to attempt to find it
+        Args: key
+
+        Raises:
+        - KeyError: When the key isn't found
+
+        Returns: The item at that key
+
+        Complexity:
+        - Worst case: O(D). D being the depth of the tree. When the tree is very unbalanced, resembling linked list.
+        - Best case: O(1). When the key is at the root.
         """
         node = self.get_tree_node_by_key(key)
         return node.item
 
     def get_tree_node_by_key(self, key: Point) -> BeeNode:
+        """
+        Attempts to get an item in the tree, it uses the Key to attempt to find it
+        Args: key
+
+        Raises:
+        - KeyError: When the key isn't found
+
+        Returns:
+        - Calling the get_tree_node_by_key_aux function. with the current being self.root and the key being the key
+        we are searching for.
+
+        Complexity:
+        - Worst case: O(D). D being the depth of the tree. When the tree is very unbalanced, resembling linked list.
+        - Best case: O(1). When the key is at the root.
+        """
         return self.get_tree_node_by_key_aux(self.root,key)
 
     def get_tree_node_by_key_aux(self, current: BeeNode, key: Point) -> BeeNode:
+        """
+        Attempts to get an item in the tree, it uses the Key to attempt to find it
+        Args:
+        - current: BeeNode, the current BeeNode we are at
+        - key: Point, the key we want to search
+
+        Raises:
+        - KeyError: When the key isn't found
+
+        Returns:
+        - Recursive function: In the next recursive call we change the current and key stays the same.
+
+        Complexity:
+        - Worst case: O(D). D being the depth of the tree. When the tree is very unbalanced, resembling linked list.
+        - Best case: O(1). When the key is at the root.
+        """
         if current == None:
-            raise KeyError("Key not found: {0}".format(key))
+            raise KeyError("Key not found:",key)
         elif key == current.key:
             return current
         else:
@@ -115,11 +209,39 @@ class ThreeDeeBeeTree(Generic[I]):
                         return self.get_tree_node_by_key_aux(current.q7, key)
 
     def __setitem__(self, key: Point, item: I) -> None:
+        """
+        Attempts to insert an item into the tree, it uses the Key to insert it
+        Args:
+        - current: BeeNode, the current BeeNode we are at
+        - key: Point, the key we want to insert
+        - item: I, the item we want to insert
+
+        Raises: None
+
+        Returns: None
+
+        Complexity:
+        - Worst case: O(D). D being the depth of the tree. When the tree is very unbalanced, resembling linked list.
+        - Best case: O(1). When we want to insert at the root.
+        """
         self.root = self.insert_aux(self.root, key, item)
 
     def insert_aux(self, current: BeeNode, key: Point, item: I) -> BeeNode:
         """
-            Attempts to insert an item into the tree, it uses the Key to insert it
+        Attempts to insert an item into the tree, it uses the Key to insert it
+        Args:
+        - current: BeeNode, the current BeeNode we are at
+        - key: Point, the key we want to insert
+        - item: I, the item we want to insert
+
+        Raises: None
+
+        Returns:
+        - BeeNode: BeeNode, the BeeNode we want to insert
+
+        Complexity:
+        - Worst case: O(D). D being the depth of the tree. When the tree is very unbalanced, resembling linked list.
+        - Best case: O(1). When we want to insert at the root.
         """
         if current is None:  # base case: at the leaf
             current = BeeNode(key, item)
@@ -127,7 +249,6 @@ class ThreeDeeBeeTree(Generic[I]):
             return current
         elif key==current.key: #updating item
             current = BeeNode(key, item)
-            self.length += 1
             return current
         else:
             if key[0] >= current.key[0]:
@@ -163,7 +284,19 @@ class ThreeDeeBeeTree(Generic[I]):
         return current
 
     def is_leaf(self, current: BeeNode) -> bool:
-        """ Simple check whether or not the node is a leaf. """
+        """ Simple check whether the node is a leaf.
+        Args:
+        - current: BeeNode, the current BeeNode we are at
+
+        Raises: None
+
+        Returns:
+        - BeeNode: BeeNode, the BeeNode we want to insert
+
+        Complexity:
+        - Worst case: O(1). When q1 is not None.
+        - Best case: O(1). When q1 to q8 is None.
+        """
         return current.q1 is None and current.q2 is None and current.q3 is None and current.q4 is None and current.q4 is None and current.q5 is None and current.q6 is None and current.q7 is None and current.q8 is None
 
 if __name__ == "__main__":
@@ -172,9 +305,8 @@ if __name__ == "__main__":
     tdbt[(1, 5, 2)] = "B" #x small, y big, z small
     tdbt[(4, 3, 1)] = "C" #x big, y big, z small
     tdbt[(5, 4, 0)] = "D" #x big, y big, z small, x big, y big, z small
-    print('tdbt[(5, 4, 0)]:',tdbt[(5, 4, 0)])
-    tdbt[(5, 4, 0)] = "E"
-    print('tdbt[(5, 4, 0)]:', tdbt[(5, 4, 0)])
+    #B=tdbt.__getitem__((1, 5, 2))
+    print(tdbt.is_leaf(tdbt.root.q6))
     #print(tdbt.root.get_child_for_key((4, 3, 1)).subtree_size) # 2
     #        A
     #   /    |
